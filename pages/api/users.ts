@@ -1,7 +1,7 @@
 import initMongoose from "@/lib/mongoose"
 import User from "@/models/user"
 import { NextApiRequest, NextApiResponse } from "next"
-import { unstable_getServerProps } from "next/dist/build/templates/pages"
+import { unstable_getServerSession } from "next-auth"
 import { authOptions } from "./auth/[...nextauth]"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -25,12 +25,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // }
 
     await initMongoose()
-    const session = await unstable_getServerProps(req, res, authOptions)
+    const session = await unstable_getServerSession(req, res, authOptions)
 
     if (req.method === 'PUT') {
         const {username} = req.body
 
-        await User.findByIdAndUpdate(session.user.id, {username:username})
+        await User.findByIdAndUpdate(session?.user?.id, {username:username})
         res.json('ok')
     }
 

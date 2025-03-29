@@ -1,6 +1,6 @@
 import { useUserInfo } from "@/hooks/useUserInfo"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 
 const UsernameForm = () => {
     const {userInfo, status} = useUserInfo()
@@ -16,6 +16,15 @@ const UsernameForm = () => {
             setUsername(defaultUsername?.replace(/[^a-z]+/gi, ''))
         }
     }, [status])
+
+    const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        fetch('api/users', {
+            method: 'PUT',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({username})
+        })
+    }
 
     if (status === 'loading') return ''
 

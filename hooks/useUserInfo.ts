@@ -1,5 +1,5 @@
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
 
 interface User {
     id: string | null
@@ -17,7 +17,7 @@ export const useUserInfo = () => {
     const getUserInfo = () => {
         if (sessionStatus === 'loading') return
 
-        if (!session.user.id) {
+        if (!session?.user?.id) {
             setStatus("error")
             return console.warn("ID do usuário não encontrado na sessão!")
         }
