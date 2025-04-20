@@ -16,7 +16,8 @@
     "next": "15.1.7",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-time-ago": "^7.3.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

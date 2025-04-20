@@ -6,6 +6,7 @@ interface User {
     name: string | null
     email: string | null
     image: string | null
+    username: string | null
 }
 
 export const useUserInfo = () => {
@@ -22,7 +23,7 @@ export const useUserInfo = () => {
             return console.warn("ID do usuário não encontrado na sessão!")
         }
 
-        fetch(`/api/users?id=${session.user.id}`)
+        fetch(`/api/users?id=${session?.user?.id}`)
             .then((response) => response.json()
             .then((json) => {
                 setUserInfo(json.user)
